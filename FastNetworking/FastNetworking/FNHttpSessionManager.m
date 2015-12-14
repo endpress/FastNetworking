@@ -14,7 +14,9 @@
     return [[[self class] alloc] initWithSessionConfiguration:nil];
 }
 
-- (void)sendURL:(NSString *)URLString
+#pragma mark - SendRequest
+
+- (void)sendURLString:(NSString *)URLString
      withMethod:(NSString *)method
      parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler
 {
@@ -23,6 +25,16 @@
     NSURLSessionDataTask *task = [self dataTaskWithRequest:request withCompletionHandler:completionHandler];
     [task resume];
 }
+
+- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler {
+    [self sendURL:URLString withMethod:@"GET" parameters:parameters completionHandler:completionHandler];
+}
+
+- (void)sendPOSTRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler {
+    [self sendURL:URLString withMethod:@"POST" parameters:parameters completionHandler:completionHandler];
+}
+
+
 
 - (NSMutableURLRequest *)requestWithURL:(NSString *)URLString method:(NSString *)method parameters:(NSDictionary *)parameters {
     if (!URLString.length) {

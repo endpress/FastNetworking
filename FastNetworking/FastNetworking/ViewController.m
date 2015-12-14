@@ -22,7 +22,7 @@
                                  @"size" : @5,
                                  @"tab" : @"改装"
                                  };
-    [[FNHttpSessionManager manager] sendURL:@"http://bbs.che-by.com/api/section" withMethod:nil parameters:nil completionHandler:^(NSURLResponse *responce, id responceObject, NSError *error) {
+    [[FNHttpSessionManager manager] sendURLString:@"http://bbs.che-by.com/api/section" withMethod:nil parameters:nil completionHandler:^(NSURLResponse *responce, id responceObject, NSError *error) {
         NSData *data = responceObject;
         NSError *err = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
