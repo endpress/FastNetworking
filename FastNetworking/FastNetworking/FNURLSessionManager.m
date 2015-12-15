@@ -113,15 +113,17 @@ static dispatch_group_t url_session_manager_completion_group() {
         userInfo[FNURLTaskCompletedResponceData] = data;
     }
     
-    if (error) {
-        dispatch_group_async(self.completionGroup, self.completionQueue, ^{
-            self.completionHandler(task.response, responceData, error);
-        });
-    } else {
-        dispatch_group_async(self.completionGroup, self.completionQueue, ^{
-            self.completionHandler(task.response, data, nil);
-        });
-    }
+    dispatch_sync(url_session_manager_processing_queue(), ^{
+        if (error) {
+            dispatch_group_async(self.completionGroup, self.completionQueue, ^{
+                self.completionHandler(task.response, responceData, error);
+            });
+        } else {
+            dispatch_group_async(self.completionGroup, self.completionQueue, ^{
+                self.completionHandler(task.response, data, nil);
+            });
+        }
+    });
     
 }
 

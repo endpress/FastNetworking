@@ -15,6 +15,7 @@
 		406ED9661C1E6C8800130426 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 406ED9641C1E6C8800130426 /* LaunchScreen.storyboard */; };
 		406ED9701C1E6D1100130426 /* FNURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 406ED96F1C1E6D1100130426 /* FNURLSessionManager.m */; };
 		406ED9751C1EA09C00130426 /* FNHttpSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 406ED9741C1EA09C00130426 /* FNHttpSessionManager.m */; };
+		408414171C1FAE1F00E053B4 /* FastRequestCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 408414161C1FAE1F00E053B4 /* FastRequestCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		406ED9721C1E71CA00130426 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		406ED9731C1EA09C00130426 /* FNHttpSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FNHttpSessionManager.h; sourceTree = "<group>"; };
 		406ED9741C1EA09C00130426 /* FNHttpSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FNHttpSessionManager.m; sourceTree = "<group>"; };
+		408414151C1FAE1F00E053B4 /* FastRequestCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastRequestCache.h; sourceTree = "<group>"; };
+		408414161C1FAE1F00E053B4 /* FastRequestCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastRequestCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				406ED9761C1EA0A800130426 /* Constants */,
+				408414181C1FAE2C00E053B4 /* Cache */,
 				406ED9711C1E6D3300130426 /* Session */,
 				406ED9591C1E6C8800130426 /* AppDelegate.h */,
 				406ED95A1C1E6C8800130426 /* AppDelegate.m */,
@@ -105,6 +109,15 @@
 				406ED9721C1E71CA00130426 /* Constants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		408414181C1FAE2C00E053B4 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				408414151C1FAE1F00E053B4 /* FastRequestCache.h */,
+				408414161C1FAE1F00E053B4 /* FastRequestCache.m */,
+			);
+			name = Cache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				408414171C1FAE1F00E053B4 /* FastRequestCache.m in Sources */,
 				406ED95E1C1E6C8800130426 /* ViewController.m in Sources */,
 				406ED95B1C1E6C8800130426 /* AppDelegate.m in Sources */,
 				406ED9751C1EA09C00130426 /* FNHttpSessionManager.m in Sources */,
@@ -331,6 +345,7 @@
 				406ED96C1C1E6C8800130426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

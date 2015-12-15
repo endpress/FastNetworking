@@ -16,6 +16,6 @@
      withMethod:(NSString *)method
      parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
 
-- (void)sendGETRequestWithURL:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
+- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
 - (void)sendPOSTRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
 @end

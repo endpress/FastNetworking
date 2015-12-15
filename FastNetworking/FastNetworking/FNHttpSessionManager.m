@@ -22,19 +22,21 @@
 {
     self.completionHandler = completionHandler;
     NSMutableURLRequest *request = [self requestWithURL:URLString method:method parameters:parameters];
-    NSURLSessionDataTask *task = [self dataTaskWithRequest:request withCompletionHandler:completionHandler];
-    [task resume];
+    if (request) {
+        NSURLSessionDataTask *task = [self dataTaskWithRequest:request withCompletionHandler:completionHandler];
+        [task resume];
+    }
 }
 
 - (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler {
-    [self sendURL:URLString withMethod:@"GET" parameters:parameters completionHandler:completionHandler];
+    [self sendURLString:URLString withMethod:@"GET" parameters:parameters completionHandler:completionHandler];
 }
 
 - (void)sendPOSTRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler {
-    [self sendURL:URLString withMethod:@"POST" parameters:parameters completionHandler:completionHandler];
+    [self sendURLString:URLString withMethod:@"POST" parameters:parameters completionHandler:completionHandler];
 }
 
-
+#pragma mark - Serialization
 
 - (NSMutableURLRequest *)requestWithURL:(NSString *)URLString method:(NSString *)method parameters:(NSDictionary *)parameters {
     if (!URLString.length) {
