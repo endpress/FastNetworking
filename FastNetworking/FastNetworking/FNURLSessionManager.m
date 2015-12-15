@@ -7,6 +7,7 @@
 //
 
 #import "FNURLSessionManager.h"
+#import "FastRequestCache.h"
 
 static dispatch_queue_t url_session_manager_creat_dataTask_queue() {
     static dispatch_queue_t fn_url_session_manager_creat_dataTask_queue;
@@ -42,6 +43,11 @@ static dispatch_group_t url_session_manager_completion_group() {
 
 @property (nonatomic, strong)NSMutableData *mutableData;
 
+/*
+ 用来存放当前的URL，方便当作缓存的KEY
+ */
+@property (nonatomic, copy) NSString *URLString;
+
 @end
 
 @implementation FNURLSessionManager
@@ -71,11 +77,14 @@ static dispatch_group_t url_session_manager_completion_group() {
     self.completionGroup = url_session_manager_completion_group();
     self.completionQueue = dispatch_get_main_queue();
     
+    self.requestCache = [FastRequestCache manager];
+    
     return self;
 }
 
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request withCompletionHandler:(CompletionHandler)completionHandler {
     __block NSURLSessionDataTask *dataTask = nil;
+    self.URLString = request.URL.absoluteString;
     self.completionHandler = completionHandler;
     dispatch_sync(url_session_manager_creat_dataTask_queue(), ^{
         dataTask = [self.session dataTaskWithRequest:request];
@@ -122,6 +131,7 @@ static dispatch_group_t url_session_manager_completion_group() {
             dispatch_group_async(self.completionGroup, self.completionQueue, ^{
                 self.completionHandler(task.response, data, nil);
             });
+            [self.requestCache storeRequestData:data ForKey:self.URLString];
         }
     });
     

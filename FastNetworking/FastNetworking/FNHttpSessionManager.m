@@ -7,6 +7,7 @@
 //
 
 #import "FNHttpSessionManager.h"
+#import "FastRequestCache.h"
 
 @implementation FNHttpSessionManager
 
@@ -22,13 +23,20 @@
 {
     self.completionHandler = completionHandler;
     NSMutableURLRequest *request = [self requestWithURL:URLString method:method parameters:parameters];
+    NSData *data = [self.requestCache getRequestCacheDataForKey:URLString];
+    if (data) {
+        self.cacheHandler(nil, nil, data, nil);
+    } else {
+        self.cacheHandler(nil, nil, nil, [self creatErrorWithString:@"没有缓存"]);
+    }
     if (request) {
         NSURLSessionDataTask *task = [self dataTaskWithRequest:request withCompletionHandler:completionHandler];
         [task resume];
     }
 }
 
-- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler {
+- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters cacheHandler:(CacheHandler)cacheHandler completionHandler:(CompletionHandler)completionHandler {
+    self.cacheHandler = cacheHandler;
     [self sendURLString:URLString withMethod:@"GET" parameters:parameters completionHandler:completionHandler];
 }
 
@@ -58,7 +66,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     if ([method isEqualToString:@"GET"]) {
         NSString *httpBody = [self getParametersStringWith:parameters];
-        if (httpBody) {
+        if (httpBody.length) {
             URLString = [URLString stringByAppendingString:@"?"];
             URLString = [URLString stringByAppendingString:httpBody];
         }

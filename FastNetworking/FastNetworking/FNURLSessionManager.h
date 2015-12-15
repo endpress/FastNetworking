@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "Constants.h"
 
+@class FastRequestCache;
+
 @interface FNURLSessionManager : NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate, NSURLSessionTaskDelegate, NSURLSessionDownloadDelegate>
 /*
  session and operationQueue
@@ -44,6 +46,12 @@
  NSLock
  */
 @property (nonatomic, strong) NSLock *lock;
+
+/*
+ 缓存
+ */
+@property (nonatomic, strong)FastRequestCache *requestCache;
+
 
 - (instancetype)initWithSessionConfiguration:(NSURLSessionConfiguration *)configuration;
 

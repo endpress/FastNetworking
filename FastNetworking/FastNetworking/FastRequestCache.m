@@ -54,19 +54,26 @@
     }
     dispatch_async(self.operateQueue, ^{
         NSString *path = [self pathforKey:key];
+//        NSLog(@"store path = %@ and store key = %@", path, key);
         if (![_fileManager fileExistsAtPath:path]) {
             [_fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
+        }
+        NSError *error = nil;
+        [_fileManager removeItemAtPath:path error:&error];
+        if (error) {
+            return ;
         }
         [_fileManager createFileAtPath:path contents:data attributes:nil];
     });
 }
 
-- (NSData *)getRequestDataForKey:(NSString *)key {
+- (NSData *)getRequestCacheDataForKey:(NSString *)key {
     if (!key.length) {
         return nil;
     }
     NSData *data = nil;
     NSString *path = [self pathforKey:key];
+//    NSLog(@"get path = %@ and get key = %@", path, key);
     if ([_fileManager fileExistsAtPath:path]) {
         data = [_fileManager contentsAtPath:path];
     }

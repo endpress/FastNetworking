@@ -10,12 +10,14 @@
 
 @interface FNHttpSessionManager : FNURLSessionManager
 
+@property (nonatomic, copy) CacheHandler cacheHandler;
+
 + (instancetype)manager;
 
 - (void)sendURLString:(NSString *)URLString
      withMethod:(NSString *)method
      parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
 
-- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
+- (void)sendGETRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters cacheHandler:(CacheHandler)cacheHandler completionHandler:(CompletionHandler)completionHandler;
 - (void)sendPOSTRequestWithURLString:(NSString *)URLString parameters:(NSDictionary *)parameters completionHandler:(CompletionHandler)completionHandler;
 @end

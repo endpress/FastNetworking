@@ -10,6 +10,8 @@
 
 typedef void(^CompletionHandler)(NSURLResponse *responce, id responceObject, NSError *error);
 
+typedef void(^CacheHandler)(NSURLResponse *responce, id responceObject, NSData *data, NSError *error);
+
 static NSString * const FNURLSessionManagerLockName = @"FNURLSessionManagerLockName";
 
 static NSString * const FNURLTaskCompletedResponceData = @"FNURLTaskCompletedResponceData";

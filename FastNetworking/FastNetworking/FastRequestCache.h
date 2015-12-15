@@ -23,4 +23,7 @@
 
 + (instancetype)manager;
 
+- (NSData *)getRequestCacheDataForKey:(NSString *)key;
+- (void)storeRequestData:(NSData *)data ForKey:(NSString *)key;
+
 @end
